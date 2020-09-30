@@ -1,31 +1,16 @@
-import React from 'react'
-import {storage} from './firebase'
-import {useForm} from 'react-hook-form'
+import React, {useEffect} from 'react';
+import {store, increment} from './redux';
+import {Switch, Route} from "react-router-dom";
 
-function App() {
-  const {register, handleSubmit} = useForm()
 
-  const onSubmit = data => {
-    const uploadedFile = data.signed_document[0]
-    const storageRef = storage.ref()
-    const fileRef = storageRef.child(uploadedFile.name)
-    
-    fileRef
-      .put(uploadedFile)
-      .then(() => {
-        console.log('file uploaded')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+import Home from './pages/Home'
+import FileUpload from './pages/FileUpload'
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input ref={register} type="file" name="signed_document" required/>
-      <button>submit</button>
-    </form>
-  );
-}
+const App = () => (
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/upload" component={FileUpload} />
+    </Switch>
+);
 
 export default App;
