@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react';
-import {store, increment} from './redux';
+import React from 'react';
 import {Switch, Route} from "react-router-dom";
-
 
 import Home from './pages/Home'
 import FileUpload from './pages/FileUpload'
